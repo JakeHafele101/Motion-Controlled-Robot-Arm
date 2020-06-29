@@ -10,6 +10,7 @@ Servo servo2;
 Servo servo3;
 Servo servo4;
 
+int pos = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -20,18 +21,18 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  int pos = 0;
+  
   pos++;
 
   if(pos > 180){
     pos = 0;
   }
 
-  servo1.write(pos)
-  servo1.write(pos)
-  servo1.write(pos)
-  servo1.write(pos)
+  servo1.write(0);
+  servo2.write(pos);
+  servo3.write(pos);
+  servo4.write(pos);
 
-  delay(100);
+  delay(10);
+
 }
