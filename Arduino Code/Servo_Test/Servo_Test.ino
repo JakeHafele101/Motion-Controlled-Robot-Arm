@@ -29,9 +29,9 @@ void loop() {
   }
 
   servo1.write(90);
-  servo2.write(pos);
-  servo3.write(pos);
-  servo4.write(pos);
+  servo2.write(90);
+  servo3.write(90);
+  servo4.write(0);
 
   delay(10);
 
