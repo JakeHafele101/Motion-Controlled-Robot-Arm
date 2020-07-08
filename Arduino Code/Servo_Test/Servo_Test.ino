@@ -1,9 +1,9 @@
 #include <Servo.h>
 
-#define SERVO_PIN_1 2
-#define SERVO_PIN_2 3
-#define SERVO_PIN_3 4
-#define SERVO_PIN_4 5
+#define SERVO_PIN_1 3
+#define SERVO_PIN_2 4
+#define SERVO_PIN_3 5
+#define SERVO_PIN_4 6
 
 Servo servo1;
 Servo servo2;
@@ -28,7 +28,7 @@ void loop() {
     pos = 0;
   }
 
-  servo1.write(0);
+  servo1.write(90);
   servo2.write(pos);
   servo3.write(pos);
   servo4.write(pos);
