@@ -38,15 +38,17 @@ THE SOFTWARE.
 #define SERVO_PIN_2 4
 #define SERVO_PIN_3 5
 #define SERVO_PIN_4 6
+#define SERVO_PIN_5 7
 
 #define FLEX_THRESHHOLD 670
 
 MPU6050 mpu;
 Servo servo1; //Base servo
-Servo servo2; //Upper Arm Servo
-Servo servo3; //Elbow Servo
-Servo servo4; //Hand Servo
-int servoPos[4];
+Servo servo2; //Left Upper Arm Servo 1
+Servo servo3; //Right Upper Arm Servo
+Servo servo4; //Elbow Servo
+Servo servo5; //Hand Servo
+int servoPos[5];
 int flex;
 int yaw, pitch, roll;
 
@@ -74,6 +76,7 @@ void setup() {
     servo2.attach(SERVO_PIN_2);
     servo3.attach(SERVO_PIN_3);
     servo4.attach(SERVO_PIN_4);
+    servo5.attach(SERVO_PIN_5);
   
     Wire.begin();
     Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
@@ -146,29 +149,32 @@ void loop() {
 
         if(pitch >= -60 && pitch <= 0){ //Checks servo2 moving down
           servoPos[1] = map(pitch, -60, 0, 0, 90);
+          servoPos[2] = servoPos[1];
         }
         else if(pitch >= 0 && pitch <= 60){ //Checks servo2 moving up
           servoPos[1] = map(pitch, 0, 60, 90, 180);
+          servoPos[2] = servoPos[1];
         }
 
-        if(roll >= -60 && roll <= 0){ //Checks servo3 moving up
-          servoPos[2] = map(roll, -60, 0, 180, 90);
+        if(roll >= -60 && roll <= 0){ //Checks servo4 moving up
+          servoPos[3] = map(roll, -60, 0, 180, 90);
         }
-        else if(roll >= 0 && roll <= 60){ //Checks servo3 moving down
-          servoPos[2] = map(roll, 0, 60, 90, 0);
+        else if(roll >= 0 && roll <= 60){ //Checks servo4 moving down
+          servoPos[3] = map(roll, 0, 60, 90, 0);
         }
         
-        if(flex >= FLEX_THRESHHOLD){ //Checks Flex Sensor
-          servoPos[3] = 90;
+        if(flex >= FLEX_THRESHHOLD){ //Checks Flex Sensor for servo5
+          servoPos[4] = 90;
         }
         else{
-          servoPos[3] = 0;
+          servoPos[4] = 0;
         }
 
         servo1.write(servoPos[0]);
         servo2.write(servoPos[1]);
         servo3.write(servoPos[2]);
         servo4.write(servoPos[3]);
+        servo5.write(servoPos[4]);
     }
 
     // reset interrupt flag and get INT_STATUS byte
