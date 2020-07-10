@@ -148,26 +148,26 @@ void loop() {
         }
 
         if(pitch >= -60 && pitch <= 0){ //Checks servo2 moving down
-          servoPos[1] = map(pitch, -60, 0, 0, 90);
-          servoPos[2] = servoPos[1];
+          servoPos[1] = map(pitch, -60, 0, 45, 90);
+          servoPos[2] = map(pitch, -60, 0, 135, 90);
         }
         else if(pitch >= 0 && pitch <= 60){ //Checks servo2 moving up
           servoPos[1] = map(pitch, 0, 60, 90, 180);
-          servoPos[2] = servoPos[1];
+          servoPos[2] = map(pitch, 0, 60, 90, 0);
         }
 
         if(roll >= -60 && roll <= 0){ //Checks servo4 moving up
-          servoPos[3] = map(roll, -60, 0, 180, 90);
+          servoPos[3] = map(roll, -60, 0, 0, 90);
         }
         else if(roll >= 0 && roll <= 60){ //Checks servo4 moving down
-          servoPos[3] = map(roll, 0, 60, 90, 0);
+          servoPos[3] = map(roll, 0, 60, 90, 180);
         }
         
         if(flex >= FLEX_THRESHHOLD){ //Checks Flex Sensor for servo5
-          servoPos[4] = 90;
+          servoPos[4] = 0;
         }
         else{
-          servoPos[4] = 0;
+          servoPos[4] = 90;
         }
 
         servo1.write(servoPos[0]);
